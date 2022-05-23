@@ -63,7 +63,7 @@ resource "aws_elastic_beanstalk_environment" "env" {
   setting {
     namespace = "aws:elbv2:listenerrule:redirect"
     name      = "HostHeaders"
-    value     = "*.${var.hosted_zone}"
+    value     = join(",", var.san)
   }
 
   setting {
