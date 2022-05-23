@@ -154,14 +154,14 @@ variable "elasticsearch" {
 }
 
 ############################################################
-# Get cert from AWS CM case
+# Create cert for specified domain case
 ############################################################
 variable "hosted_zone" {
   type    = string
   default = "mydomain.org"
 }
 
-variable "certificate_san" {
-  type    = string
-  default = "*.mydomain.org"
+variable "san" {
+  type    = set(string)
+  default = ["*.mydomain.org"]
 }

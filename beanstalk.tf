@@ -93,7 +93,7 @@ resource "aws_elastic_beanstalk_environment" "env" {
   setting {
     namespace = "aws:elbv2:listener:443"
     name      = "SSLCertificateArns"
-    value     = data.aws_acm_certificate.certificate.arn
+    value     = aws_acm_certificate.certificate.arn
   }
 
   ############################################################

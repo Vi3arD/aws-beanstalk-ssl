@@ -1,2 +1,2 @@
 # aws-beanstalk-ssl
-# Existing on AWS CM certificate case
+# Create on letsencrypt service certificate case
