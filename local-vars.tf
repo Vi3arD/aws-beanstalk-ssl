@@ -1,11 +1,11 @@
 ############################################################
 # Self-signed cert case
 ############################################################
-resource "random_integer" "random" {
-  min = 1
-  max = 500000
+resource "random_string" "random" {
+  length  = 16
+  special = false
 }
 
 locals {
-  beanstalk_prefix = "${var.name}-${random_integer.random}"
+  beanstalk_prefix = "${var.name}-${random_string.random}"
 }
