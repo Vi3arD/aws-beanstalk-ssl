@@ -1,2 +1,2 @@
 # aws-beanstalk-ssl
-# Self-signed certificate case
+# Existing on AWS CM certificate case

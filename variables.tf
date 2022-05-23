@@ -152,3 +152,16 @@ variable "elasticsearch" {
   type    = list(string)
   default = []
 }
+
+############################################################
+# Get cert from AWS CM case
+############################################################
+variable "hosted_zone" {
+  type    = string
+  default = "mydomain.org"
+}
+
+variable "certificate_san" {
+  type    = string
+  default = "*.mydomain.org"
+}

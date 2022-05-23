@@ -20,12 +20,6 @@ resource "aws_elastic_beanstalk_environment" "env" {
   solution_stack_name = data.aws_elastic_beanstalk_solution_stack.docker.name
 
   version_label = aws_elastic_beanstalk_application_version.latest.name
-
-  ############################################################
-  # Self-signed cert case
-  ############################################################
-  cname_prefix = local.beanstalk_prefix
-  ############################################################
   
   setting {
     namespace = "aws:ec2:vpc"
@@ -58,8 +52,32 @@ resource "aws_elastic_beanstalk_environment" "env" {
   }
 
   ############################################################
-  # Self-signed cert case
+  # Get cert from AWS CM case
   ############################################################
+  setting {
+    namespace = "aws:elasticbeanstalk:environment:process:redirectproc"
+    name      = "Port"
+    value     = "443"
+  }
+
+  setting {
+    namespace = "aws:elbv2:listenerrule:redirect"
+    name      = "HostHeaders"
+    value     = "*.${var.hosted_zone}"
+  }
+
+  setting {
+    namespace = "aws:elbv2:listenerrule:redirect"
+    name      = "Process"
+    value     = "redirectproc"
+  }
+
+  setting {
+    namespace = "aws:elbv2:listener:default"
+    name      = "Rules"
+    value     = "redirect"
+  }
+
   setting {
     namespace = "aws:elbv2:listener:443"
     name      = "ListenerEnabled"
@@ -75,10 +93,10 @@ resource "aws_elastic_beanstalk_environment" "env" {
   setting {
     namespace = "aws:elbv2:listener:443"
     name      = "SSLCertificateArns"
-    value     = aws_acm_certificate.certificate.arn
+    value     = data.aws_acm_certificate.certificate.arn
   }
-  ############################################################
 
+  ############################################################
 
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
