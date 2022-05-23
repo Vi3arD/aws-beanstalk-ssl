@@ -1,0 +1,4 @@
+commands:
+  install: chmod +x install.sh && ./install.sh
+  update: chmod +x install.sh && ./install.sh
+  clean: chmod +x clean.sh && ./clean.sh
