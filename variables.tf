@@ -154,7 +154,7 @@ variable "elasticsearch" {
 }
 
 ############################################################
-# Create cert for specified domain case
+# Create cert for specified domain case in AWS
 ############################################################
 variable "hosted_zone" {
   type    = string

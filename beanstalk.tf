@@ -20,7 +20,7 @@ resource "aws_elastic_beanstalk_environment" "env" {
   solution_stack_name = data.aws_elastic_beanstalk_solution_stack.docker.name
 
   version_label = aws_elastic_beanstalk_application_version.latest.name
-  
+
   setting {
     namespace = "aws:ec2:vpc"
     name      = "VPCId"
@@ -52,7 +52,7 @@ resource "aws_elastic_beanstalk_environment" "env" {
   }
 
   ############################################################
-  # Get cert from AWS CM case
+  # Create cert for specified domain case in AWS
   ############################################################
 #  setting {
 #    namespace = "aws:elasticbeanstalk:environment:process:redirectproc"
@@ -93,7 +93,7 @@ resource "aws_elastic_beanstalk_environment" "env" {
   setting {
     namespace = "aws:elbv2:listener:443"
     name      = "SSLCertificateArns"
-    value     = aws_acm_certificate.certificate.arn
+    value     = aws_acm_certificate_validation.validation.certificate_arn
   }
 
   ############################################################
@@ -116,14 +116,14 @@ resource "aws_elastic_beanstalk_environment" "env" {
     value     = aws_security_group.instance.id
   }
 
-  
+
   setting {
     namespace = "aws:ec2:instances"
     name      = "InstanceTypes"
     value     = var.instance_type
   }
 
-  
+
   setting {
     namespace = "aws:ec2:instances"
     name      = "EnableSpot"
@@ -139,7 +139,7 @@ resource "aws_elastic_beanstalk_environment" "env" {
     }
   }
 
-  
+
   setting {
     namespace = "aws:elasticbeanstalk:application"
     name      = "Application Healthcheck URL"
@@ -190,7 +190,7 @@ resource "aws_elastic_beanstalk_environment" "env" {
       value = setting.value
     }
   }
-  
+
   setting {
     namespace = "aws:elasticbeanstalk:cloudwatch:logs"
     name      = "StreamLogs"
