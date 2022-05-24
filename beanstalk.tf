@@ -54,29 +54,29 @@ resource "aws_elastic_beanstalk_environment" "env" {
   ############################################################
   # Get cert from AWS CM case
   ############################################################
-  setting {
-    namespace = "aws:elasticbeanstalk:environment:process:redirectproc"
-    name      = "Port"
-    value     = "443"
-  }
-
-  setting {
-    namespace = "aws:elbv2:listenerrule:redirect"
-    name      = "HostHeaders"
-    value     = join(",", var.san)
-  }
-
-  setting {
-    namespace = "aws:elbv2:listenerrule:redirect"
-    name      = "Process"
-    value     = "redirectproc"
-  }
-
-  setting {
-    namespace = "aws:elbv2:listener:default"
-    name      = "Rules"
-    value     = "redirect"
-  }
+#  setting {
+#    namespace = "aws:elasticbeanstalk:environment:process:redirectproc"
+#    name      = "Port"
+#    value     = "443"
+#  }
+#
+#  setting {
+#    namespace = "aws:elbv2:listenerrule:redirect"
+#    name      = "HostHeaders"
+#    value     = join(",", var.san)
+#  }
+#
+#  setting {
+#    namespace = "aws:elbv2:listenerrule:redirect"
+#    name      = "Process"
+#    value     = "redirectproc"
+#  }
+#
+#  setting {
+#    namespace = "aws:elbv2:listener:default"
+#    name      = "Rules"
+#    value     = "redirect"
+#  }
 
   setting {
     namespace = "aws:elbv2:listener:443"
